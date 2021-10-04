@@ -1,34 +1,41 @@
   abstract class Transport {
-    positionX: number;
-    positionY: number;
+    protected static positionX : number = 0;
+    protected static positionY : number = 0;
+    private readonly width: number;
+    private readonly height: number;
 
 
-    constructor(x: number, y: number) {
-      this.positionX = x;
-      this.positionY = y;
+    constructor(width: number, height: number) {
+      this.width = width;
+      this.height = height;
     }
 
 
     display(): void{
-      console.log('x =' + this.positionX + ' y =' + this.positionY);
+      console.log('x =' + Transport.positionX + ' y =' + Transport.positionY);
+      console.log('width = ' + this.width + 'height = ' + this.height);
     }
 
     moveForward(x: number){
-      this.positionX = x + 20;
+      Transport.positionX = x + 20;
+      console.log('x =' + Transport.positionX + ' y =' + Transport.positionY);
     }
 
 
     moveBack(x: number){
-      this.positionX = x - 20;
+      Transport.positionX = x - 20;
+      console.log('x =' + Transport.positionX + ' y =' + Transport.positionY);
     }
 
 
     moveUp(y: number) {
-      this.positionY = y + 20;
+      Transport.positionY = y + 20;
+      console.log('x =' + Transport.positionX + ' y =' + Transport.positionY);
     }
 
 
     moveDown(y: number) {
-      this.positionY = y - 20;
+      Transport.positionY = y - 20;
+      console.log('x =' + Transport.positionX + ' y =' + Transport.positionY);
     }
   }
