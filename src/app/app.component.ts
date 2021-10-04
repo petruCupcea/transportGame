@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, Renderer2} from '@angular/core';
+
+import { Car } from './classes/car';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'transport-game';
+  car: Car;
 
-  constructor() {
+  constructor(private readonly renderer2: Renderer2) {
+    //this.transport = new Car(1200, 600, this.renderer2);
   }
+
 }

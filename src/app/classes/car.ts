@@ -1,8 +1,6 @@
- class Car extends Transport {
+import {Transport} from "./transport";
 
-  constructor(width: number, height: number) {
-    super(width, height);
-  }
+class Car extends Transport {
 
    moveUp() {
      console.log('Cars don\'t fly');
