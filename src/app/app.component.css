@@ -17,9 +17,26 @@ button{
   padding-top: 20px;
 }
 .main{
-  width: 1200px;
+  width: 1600px;
   height: 600px;
+  background-color: #e6e6fa;
+  margin: auto;
+  border-radius: 20px;
+  padding: 50px 0;
+}
+.sky{
+  width: 1200px;
+  height: 300px;
+  background-color: #b0e0fa;
+  margin:auto;
+  border-radius: 10px 10px 0 0;
+  border: solid 2px;
+}
+.underwater{
+  width: 1200px;
+  height: 300px;
   background-color: #00ffff;
   margin: auto;
-  border-radius: 10px;
+  border: solid 2px;
+  border-radius: 0 0 10px 10px;
 }
