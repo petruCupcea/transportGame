@@ -1,6 +1,11 @@
 import {Transport} from "./transport";
+import {Renderer2} from "@angular/core";
 
 export class Plane extends Transport {
+
+  constructor(width: number, height:number, renderer2: Renderer2,name: string = 'Plane') {
+    super(width, height, renderer2, name);
+  }
 
   moveForward() {
     Transport.positionX += 50;

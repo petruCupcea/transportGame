@@ -1,13 +1,12 @@
 <div class="header">
-  <button>Car</button>
-  <button>Truck</button>
-  <button>Plane</button>
-  <button>Moto</button>
-  <button>Submarine</button>
+  <button (click)="createCar()">Car</button>
+  <button (click)="createTruck()">Truck</button>
+  <button (click)="createPlane()">Plane</button>
+  <button (click)="createMoto()">Moto</button>
+  <button (click)="createSubmarine()">Submarine</button>
 </div>
 <div class="main">
-  <div class="sky" [innerHTML]="">
-    <div class="transport" *ngIf="" [style]="">car</div>
+  <div class="sky" #sky>
   </div>
   <div class="underwater"></div>
 </div>

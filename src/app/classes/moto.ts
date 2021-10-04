@@ -1,7 +1,10 @@
-class Moto extends Transport {
+import {Transport} from "./transport";
+import {Renderer2} from "@angular/core";
 
-  constructor(width: number, height: number) {
-    super(width, height);
+export class Moto extends Transport {
+
+  constructor(width: number, height:number, renderer2: Renderer2,name: string = 'Moto') {
+    super(width, height, renderer2, name);
   }
 
   moveBack() {
