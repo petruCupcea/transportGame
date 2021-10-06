@@ -56,6 +56,11 @@ button{
   font-weight: bold;
   color: #ffffff;
   text-align: center;
-  transition: all 0.3s;
 }
+.active {
+  background-color: #7fff00;
+  border: 2px solid;
+  color: #000000;
+}
+
 

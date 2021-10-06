@@ -12,6 +12,9 @@ export abstract class Transport {
   private readonly document: Document;
   private readonly renderer2: Renderer2;
   private active: boolean;
+  private documentClickEventListenerRef: (event) => void;
+  private htmlElementClickEventListenerRef: (event) => void;
+  private documentKeyDownEventListenerRef: (event) => void;
 
 
   constructor(parentNode: ElementRef, document: Document, renderer2: Renderer2, name: string) {
@@ -30,30 +33,16 @@ export abstract class Transport {
     this.renderer2.appendChild(this.htmlElement, this.renderer2.createText(name));
     this.renderer2.appendChild(this.parentNode.nativeElement, this.htmlElement);
 
-    this.htmlElement.onclick = (event) => {
-      event.stopPropagation();
-      this.active = true;
-      console.log('active');
-    }
+    this.documentClickEventListenerRef = this.documentClickEventListener();
+    this.htmlElementClickEventListenerRef = this.htmlElementClickEventListener();
+    this.documentKeyDownEventListenerRef = this.documentKeyDownEventListener()
 
+    this.htmlElement.addEventListener('click', this.htmlElementClickEventListenerRef);
 
-    this.document.onclick = () => {
-      this.active = false;
-      console.log('parentNode');
-    }
-    this.document.onkeydown = (event) => {
-        if(this.active === true) {
-           if(event.key === 'ArrowUp') {
-             this.moveUp();
-           } else if (event.key === 'ArrowRight') {
-             this.moveForward();
-           } else if (event.key === 'ArrowLeft') {
-             this.moveBack();
-           } else if (event.key === 'ArrowDown') {
-             this.moveDown();
-           }
-        }
-    }
+    this.document.addEventListener('click', this.documentClickEventListenerRef);
+
+    this.document.addEventListener('keydown', this.documentKeyDownEventListenerRef);
+
   }
 
   updatePosition() {
@@ -69,31 +58,74 @@ export abstract class Transport {
   moveForward(){
     this.positionX += 20;
     this.updatePosition();
-    console.log('x =' + this.positionX + ' y =' + this.positionY);
   }
 
 
   moveBack(){
     this.positionX -= 20;
     this.updatePosition();
-    console.log('x =' + this.positionX + ' y =' + this.positionY);
   }
 
 
   moveUp() {
     this.positionY += 20;
     this.updatePosition();
-    console.log('x =' + this.positionX + ' y =' + this.positionY);
   }
 
 
   moveDown() {
     this.positionY -= 20;
     this.updatePosition();
-    console.log('x =' + this.positionX + ' y =' + this.positionY);
   }
 
   destroy() {
+    this.document.removeEventListener('click', this.documentClickEventListenerRef);
+    this.document.removeEventListener('keypress', this.documentClickEventListenerRef);
+    this.htmlElement.removeEventListener('click', this.documentClickEventListenerRef);
     this.renderer2.removeChild(this.parentNode.nativeElement, this.htmlElement);
   }
+
+
+  private documentClickEventListener(): (event) => void {
+    return (event) => {
+      if (this.htmlElement !== event.target) {
+        this.active = false;
+      }
+      this.focusColorChange();
+    };
+  }
+
+  private htmlElementClickEventListener(): (event) => void {
+  return (event) => {
+    if(this.htmlElement === event.target) {
+      this.active = true;
+      }
+    this.focusColorChange();
+    };
+  }
+
+  private documentKeyDownEventListener(): (event) => void {
+    return (event) => {
+      if(this.active === true) {
+        if(event.key === 'ArrowUp') {
+          this.moveUp();
+        } else if (event.key === 'ArrowRight') {
+          this.moveForward();
+        } else if (event.key === 'ArrowLeft') {
+          this.moveBack();
+        } else if (event.key === 'ArrowDown') {
+          this.moveDown();
+        }
+      }
+    }
+  }
+
+  private focusColorChange() {
+    if(this.active === true) {
+      this.renderer2.addClass(this.htmlElement, `active`);
+    } else {
+      this.renderer2.removeClass(this.htmlElement, `active`);
+    }
+  }
+
 }
