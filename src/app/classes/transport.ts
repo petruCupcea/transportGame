@@ -2,6 +2,7 @@ import {ElementRef, Renderer2} from "@angular/core";
 
 export abstract class Transport {
 
+  protected image: string;
   protected positionX : number;
   protected positionY : number;
   protected name: string;
@@ -10,7 +11,7 @@ export abstract class Transport {
   private readonly height: number;
   private readonly parentNode: ElementRef;
   private readonly document: Document;
-  private readonly renderer2: Renderer2;
+  protected readonly renderer2: Renderer2;
   private active: boolean;
   private documentClickEventListenerRef: (event) => void;
   private htmlElementClickEventListenerRef: (event) => void;
@@ -30,7 +31,7 @@ export abstract class Transport {
     this.htmlElement = renderer2.createElement('div');
     this.renderer2.addClass(this.htmlElement, `transport`);
     this.updatePosition();
-    this.renderer2.appendChild(this.htmlElement, this.renderer2.createText(name));
+    // this.renderer2.appendChild(this.htmlElement, this.renderer2.createText(name));
     this.renderer2.appendChild(this.parentNode.nativeElement, this.htmlElement);
 
     this.documentClickEventListenerRef = this.documentClickEventListener();
