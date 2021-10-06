@@ -1,10 +1,10 @@
 import {Transport} from "./transport";
-import {Renderer2} from "@angular/core";
+import {ElementRef, Renderer2} from "@angular/core";
 
-export class Moto extends Transport {
+export class Moto extends Transport{
 
-  constructor(width: number, height:number, renderer2: Renderer2,name: string = 'Moto') {
-    super(width, height, renderer2, name);
+  constructor(parentNode: ElementRef, document: Document, renderer2: Renderer2,name: string = 'Moto') {
+    super(parentNode, document, renderer2, name);
   }
 
   moveBack() {

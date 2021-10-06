@@ -1,10 +1,20 @@
 import {Transport} from "./transport";
-import {Renderer2} from "@angular/core";
+import {ElementRef, Renderer2} from "@angular/core";
 
-export class Truck extends Transport {
+export class Truck extends Transport{
 
-  constructor(width: number, height:number, renderer2: Renderer2,name: string = 'Truck') {
-    super(width, height, renderer2, name);
+  constructor(parentNode: ElementRef, document: Document, renderer2: Renderer2,name: string = 'Truck') {
+    super(parentNode, document, renderer2, name);
+  }
+
+  moveForward() {
+    this.positionX += 10;
+    this.updatePosition();
+  }
+
+  moveBack() {
+    this.positionX -= 10;
+    this.updatePosition();
   }
 
   moveUp() {
@@ -14,5 +24,4 @@ export class Truck extends Transport {
   moveDown() {
     console.log('Truck will sink');
   }
-
 }

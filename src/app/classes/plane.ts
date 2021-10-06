@@ -1,19 +1,15 @@
 import {Transport} from "./transport";
-import {Renderer2} from "@angular/core";
+import {ElementRef, Renderer2} from "@angular/core";
 
-export class Plane extends Transport {
+export class Plane extends Transport{
 
-  constructor(width: number, height:number, renderer2: Renderer2,name: string = 'Plane') {
-    super(width, height, renderer2, name);
+  constructor(parentNode: ElementRef, document: Document, renderer2: Renderer2,name: string = 'Plane') {
+    super(parentNode, document, renderer2, name);
   }
 
   moveForward() {
-    Transport.positionX += 50;
-    console.log('x =' + Transport.positionX + ' y =' + Transport.positionY);
+    this.positionX += 40;
+    this.updatePosition();
+    console.log('x =' + this.positionX + ' y =' + this.positionY);
   }
-
-  moveDown() {
-    console.log('This plane is not going down');
-  }
-
 }

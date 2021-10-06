@@ -1,4 +1,5 @@
-import {Component, ElementRef, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, Renderer2, ViewChild} from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 import { Car } from './classes/car';
 import {Transport} from "./classes/transport";
@@ -15,6 +16,7 @@ import {Submarine} from "./classes/submarine";
 export class AppComponent {
 
   @ViewChild('sky') sky: ElementRef | undefined;
+  @ViewChild('underwater') underwater: ElementRef | undefined;
 
   title = 'transport-game';
   transportCar: Transport | undefined;
@@ -23,35 +25,44 @@ export class AppComponent {
   transportMoto: Transport | undefined;
   transportSubmarine: Transport | undefined;
 
-  constructor(private readonly renderer2: Renderer2) {
+  constructor(@Inject(DOCUMENT) private document: Document, private readonly renderer2: Renderer2) {
   }
 
 
   createCar() {
-    this.transportCar = new Car(1200, 600, this.renderer2);
-    this.transportCar.moveForward();
-    this.renderer2.appendChild(this.sky?.nativeElement, this.transportCar?.getHtmlElement());
+    if (this.transportCar) {
+      this.transportCar.destroy();
+    }
+    this.transportCar = new Car(this.sky, this.document, this.renderer2);
   }
 
-  createTruck() {
-    this.transportTruck = new Truck( 1200, 600, this.renderer2);
-    this.renderer2.appendChild(this.sky?.nativeElement, this.transportTruck?.getHtmlElement());
 
+  createTruck() {
+    if (this.transportTruck) {
+      this.transportTruck.destroy();
+    }
+    this.transportTruck = new Truck(this.sky, this.document, this.renderer2);
   }
 
   createPlane() {
-    this.transportPlane = new Plane( 1200, 600, this.renderer2);
-    this.renderer2.appendChild(this.sky?.nativeElement, this.transportPlane?.getHtmlElement());
+    if (this.transportPlane) {
+      this.transportPlane.destroy();
+    }
+    this.transportPlane = new Plane(this.sky, this.document, this.renderer2);
   }
 
   createMoto() {
-    this.transportMoto = new Moto( 1200, 600, this.renderer2);
-    this.renderer2.appendChild(this.sky?.nativeElement, this.transportMoto?.getHtmlElement());
+    if (this.transportMoto) {
+      this.transportMoto.destroy();
+    }
+    this.transportMoto = new Moto(this.sky, this.document, this.renderer2);
   }
 
   createSubmarine() {
-    this.transportSubmarine = new Submarine( 1200, 600, this.renderer2);
-    this.renderer2.appendChild(this.sky?.nativeElement, this.transportSubmarine?.getHtmlElement());
+    if (this.transportSubmarine) {
+      this.transportSubmarine.destroy();
+    }
+    this.transportSubmarine = new Submarine(this.sky, this.document, this.renderer2);
   }
 
 }

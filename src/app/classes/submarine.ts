@@ -1,10 +1,11 @@
 import {Transport} from "./transport";
-import {Renderer2} from "@angular/core";
+import {ElementRef, Renderer2} from "@angular/core";
+import {Truck} from "./truck";
 
-export class Submarine extends Transport {
+export class Submarine extends Transport{
 
-  constructor(width: number, height:number, renderer2: Renderer2,name: string = 'Submarine') {
-    super(width, height, renderer2, name);
+  constructor(parentNode: ElementRef, document: Document, renderer2: Renderer2,name: string = 'Submarine') {
+    super(parentNode, document, renderer2, name);
   }
 
   moveBack() {

@@ -1,10 +1,10 @@
 import {Transport} from "./transport";
-import {Renderer2} from "@angular/core";
+import {ElementRef, Renderer2} from "@angular/core";
 
 export class Car extends Transport {
 
-  constructor(width: number, height:number, renderer2: Renderer2,name: string = 'Car') {
-    super(width, height, renderer2, name);
+  constructor(parentNode: ElementRef, document: Document, renderer2: Renderer2,name: string = 'Car') {
+    super(parentNode, document, renderer2, name);
   }
 
    moveUp() {
@@ -14,5 +14,4 @@ export class Car extends Transport {
    moveDown() {
      console.log('Car will sink');
    }
-
 }
