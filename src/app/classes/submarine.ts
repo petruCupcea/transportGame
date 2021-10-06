@@ -8,11 +8,15 @@ export class Submarine extends Transport{
     super(parentNode, document, renderer2, name);
   }
 
+  updatePosition() {
+    if (this.positionY > -20) {
+      this.positionY = -300;
+    } else if (this.positionY < -300) {
+      this.positionY = -20;
+    }
+    super.updatePosition();
+  }
   moveBack() {
     console.log('A\'int going back');
-  }
-
-  moveUp() {
-    console.log('Submarines are not flying today');
   }
 }
