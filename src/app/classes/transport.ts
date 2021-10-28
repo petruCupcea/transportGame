@@ -109,15 +109,11 @@ export abstract class Transport {
     return (event) => {
       console.log(event, 'documentKeyDownEventListener');
       if(this.active === true) {
-        console.log(event);
-        if(event.key === 'ArrowUp') {
-          this.moveUp();
-        } else if (event.key === 'ArrowRight') {
-          this.moveForward();
-        } else if (event.key === 'ArrowLeft') {
-          this.moveBack();
-        } else if (event.key === 'ArrowDown') {
-          this.moveDown();
+        switch (event.key) {
+          case 'ArrowUp':{ this.moveUp()}; break;
+          case 'ArrowDown':{ this.moveDown()}; break;
+          case 'ArrowRight':{ this.moveForward()}; break;
+          case 'ArrowLeft':{ this.moveBack()}; break;
         }
       }
     }
