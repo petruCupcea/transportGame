@@ -20,10 +20,10 @@ export class Truck extends Transport{
   }
 
   moveUp() {
-    console.log('Trucks don\'t fly');
+    this.upDownFail();
   }
 
   moveDown() {
-    console.log('Truck will sink');
+    this.upDownFail();
   }
 }

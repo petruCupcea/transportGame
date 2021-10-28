@@ -12,10 +12,11 @@ export class Car extends Transport {
   }
 
    moveUp() {
-     console.log('Cars don\'t fly');
-   }
+     this.upDownFail();
+  }
 
    moveDown() {
-     console.log('Car will sink');
+     this.upDownFail();
    }
+
 }

@@ -14,10 +14,10 @@ export class Moto extends Transport{
   }
 
   moveUp() {
-    console.log('not going to fly');
+    this.upDownFail();
   }
 
   moveDown() {
-    console.log('this moto will sink');
+    this.upDownFail();
   }
 }

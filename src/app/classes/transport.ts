@@ -81,8 +81,8 @@ export abstract class Transport {
 
   destroy() {
     this.document.removeEventListener('click', this.documentClickEventListenerRef);
-    this.document.removeEventListener('keypress', this.documentClickEventListenerRef);
-    this.htmlElement.removeEventListener('click', this.documentClickEventListenerRef);
+    this.document.removeEventListener('keydown', this.documentKeyDownEventListenerRef);
+    this.htmlElement.removeEventListener('click', this.htmlElementClickEventListenerRef);
     this.renderer2.removeChild(this.parentNode.nativeElement, this.htmlElement);
   }
 
@@ -107,7 +107,9 @@ export abstract class Transport {
 
   private documentKeyDownEventListener(): (event) => void {
     return (event) => {
+      console.log(event, 'documentKeyDownEventListener');
       if(this.active === true) {
+        console.log(event);
         if(event.key === 'ArrowUp') {
           this.moveUp();
         } else if (event.key === 'ArrowRight') {
@@ -127,6 +129,13 @@ export abstract class Transport {
     } else {
       this.renderer2.removeClass(this.htmlElement, `active`);
     }
+  }
+
+  upDownFail() {
+    this.renderer2.setStyle(this.htmlElement,'animation', 'ease-in up-fail 0.1s')
+    setTimeout(() => {
+      this.renderer2.removeStyle(this.htmlElement, 'animation');
+    }, 100);
   }
 
 }

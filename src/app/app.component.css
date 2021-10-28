@@ -60,14 +60,17 @@ button{
   font-weight: bold;
   color: #ffffff;
   text-align: center;
-  /*transition: all 0.1s;*/
   z-index: 0;
 }
 .active {
-  border: 2px solid;
+  border-bottom: 3px solid;
   color: #7fff00;
-  /*transition: all 0.1s;*/
   z-index: 1;
+}
+
+@keyframes up-fail {
+  0%{bottom: -12px;}
+  100%{bottom: 12px;}
 }
 
 
