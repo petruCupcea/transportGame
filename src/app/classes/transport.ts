@@ -1,4 +1,5 @@
 import {ElementRef, Renderer2} from "@angular/core";
+import {interval} from "rxjs";
 
 export abstract class Transport {
 
@@ -108,6 +109,8 @@ export abstract class Transport {
   private documentKeyDownEventListener(): (event) => void {
     return (event) => {
       console.log(event, 'documentKeyDownEventListener');
+      // const interval1 = setInterval(() => {}, 100);
+      // clearInterval(interval1);
       if(this.active === true) {
         switch (event.key) {
           case 'ArrowUp':{ this.moveUp()}; break;
